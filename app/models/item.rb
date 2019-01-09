@@ -20,4 +20,8 @@ class Item < ApplicationRecord
       original_price
     end
   end
+
+  def self.average_price
+    Item.all.sum {|item| item.price} / Item.all.size
+  end
 end
