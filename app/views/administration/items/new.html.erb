@@ -1,0 +1,7 @@
+<%= simple_form_for @item, :url => administration_update_path do |f| %>
+ <%= f.hidden_field :id %>
+    <td><%= @item.original_price %></td>
+  <td><%= f.number_field :discount_percentage%></td>
+  <td><%= @item.price %></td>
+<%= f.submit "Modifier", class: "btn btn-primary" %>
+<% end %>

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   namespace 'administration' do
     get '/', to: 'items#index'
 
-    resources :items
+  resources :items, only: [:index, :show, :edit]
+  patch  "items/:id",      to: "items#update", :as => 'update'
   end
 end
