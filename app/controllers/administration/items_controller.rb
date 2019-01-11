@@ -3,7 +3,7 @@
 module Administration
   class ItemsController < AdministrationController
       def index
-       @items = Item.all
+       @items = Item.all.order(:original_price)
       end
 
     def show
@@ -32,7 +32,7 @@ module Administration
     end
 
     def item_params
-      params.require(:item).permit(:discount_percentage, :original_price, :price, :has_discount)
+      params.require(:item).permit(:discount_percentage, :original_price, :price, :has_discount, :name)
     end
 
   end
