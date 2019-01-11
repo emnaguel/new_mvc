@@ -25,8 +25,15 @@ RSpec.describe Item, type: :model do
       it { is_expected.to have_db_column(:has_discount).of_type(:boolean).with_options(default: false) }
       it { is_expected.to have_db_column(:discount_percentage).of_type(:integer).with_options(default: 0) }
       it { is_expected.to have_db_column(:updated_at).of_type(:datetime).with_options(null: false) }
+      it { is_expected.to have_db_column(:name).of_type(:string) }
+    end
+  end
 
-
+  describe 'Item' do
+    it "should be invalid if there is no name" do
+      item = Item.new(original_price: 12, discount_percentage: 20, has_discount: true)
+      expect(item.valid?).to eq false
+      expect(item.errors.messages[:name]).to include "can't be blank"
     end
   end
 
@@ -42,4 +49,5 @@ RSpec.describe Item, type: :model do
       it { expect(item.price).to eq(100.00) }
     end
   end
+
 end
