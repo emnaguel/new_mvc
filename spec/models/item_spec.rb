@@ -16,9 +16,10 @@ require 'rails_helper'
 
 RSpec.describe Item, type: :model do
   describe 'Model instantiation' do
-    subject(:new_item) { described_class.new }
+
 
     describe 'Database' do
+      subject(:new_item) { described_class.new }
       it { is_expected.to have_db_column(:id).of_type(:integer) }
       it { is_expected.to have_db_column(:original_price).of_type(:float).with_options(null: false) }
       it { is_expected.to have_db_column(:created_at).of_type(:datetime).with_options(null: false) }

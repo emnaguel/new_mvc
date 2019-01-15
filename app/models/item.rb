@@ -15,8 +15,9 @@
 class Item < ApplicationRecord
 has_many :categorizations
 validates :name, presence: true
+validates :discount_percentage, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
   def price
-    if self.has_discount
+    if has_discount
       original_price - (original_price * discount_percentage.to_f/100)
     else
       original_price
@@ -24,6 +25,6 @@ validates :name, presence: true
   end
 
   def self.average_price
-    Item.all.sum {|item| item.price} / Item.all.size
+   all.sum {|item| item.price} / count
   end
 end

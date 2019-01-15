@@ -2,6 +2,7 @@
 
 module Administration
   class ItemsController < AdministrationController
+      before_action :set_item, only: [:update]
       def index
        @items = Item.all.order(:original_price)
       end
@@ -10,14 +11,16 @@ module Administration
       set_item
     end
 
-    def edit
-      set_item
-    end
+    # def edit
+    #   set_item
+    # end
 
     def update
-       set_item
-      @item.update(item_params)
-      redirect_to administration_items_path
+      if @item.update(item_params)
+        redirect_to administration_items_path, notice: "L'article a été correctement mis à jour"
+      else
+        redirect_back fallback_location: root_path, alert: "L'article n'a pas été mis à jour"
+      end
     end
 
 # @item = Item.find(params[:id])
@@ -32,7 +35,7 @@ module Administration
     end
 
     def item_params
-      params.require(:item).permit(:discount_percentage, :original_price, :price, :has_discount, :name)
+      params.require(:item).permit(:discount_percentage)
     end
 
   end
