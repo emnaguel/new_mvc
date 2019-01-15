@@ -13,18 +13,18 @@
 #
 
 class Item < ApplicationRecord
-has_many :categorizations
-validates :name, presence: true
-validates :discount_percentage, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
+  has_many :categorizations, dependent: :destroy
+  # validates :name, presence: true
+  validates :discount_percentage, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
   def price
     if has_discount
-      original_price - (original_price * discount_percentage.to_f/100)
+      original_price - (original_price * discount_percentage.to_f / 100)
     else
       original_price
     end
   end
 
   def self.average_price
-   all.sum {|item| item.price} / count
+    all.sum(&:price) / count
   end
 end

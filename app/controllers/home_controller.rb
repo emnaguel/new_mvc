@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
 class HomeController < ApplicationController
-  def landing_page
-
-    end
-  end
-
+  def landing_page; end
+end

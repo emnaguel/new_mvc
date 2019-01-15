@@ -16,10 +16,9 @@ require 'rails_helper'
 
 RSpec.describe Item, type: :model do
   describe 'Model instantiation' do
-
-
     describe 'Database' do
       subject(:new_item) { described_class.new }
+
       it { is_expected.to have_db_column(:id).of_type(:integer) }
       it { is_expected.to have_db_column(:original_price).of_type(:float).with_options(null: false) }
       it { is_expected.to have_db_column(:created_at).of_type(:datetime).with_options(null: false) }
@@ -30,25 +29,17 @@ RSpec.describe Item, type: :model do
     end
   end
 
-  describe 'Item' do
-    it "should be invalid if there is no name" do
-      item = Item.new(original_price: 12, discount_percentage: 20, has_discount: true)
-      expect(item.valid?).to eq false
-      expect(item.errors.messages[:name]).to include "can't be blank"
-    end
-  end
-
   describe 'Price' do
     context 'when the item has a discount' do
       let(:item) { build(:item_with_discount, original_price: 100.00, discount_percentage: 20) }
 
       it { expect(item.price).to eq(80.00) }
     end
+
     context "when the item doesn/'t have a discount" do
       let(:item) { build(:item_without_discount, original_price: 100.00, discount_percentage: nil) }
 
       it { expect(item.price).to eq(100.00) }
     end
   end
-
 end

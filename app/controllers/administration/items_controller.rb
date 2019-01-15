@@ -2,10 +2,10 @@
 
 module Administration
   class ItemsController < AdministrationController
-      before_action :set_item, only: [:update]
-      def index
-       @items = Item.all.order(:original_price)
-      end
+    before_action :set_item, only: [:update]
+    def index
+      @items = Item.all.order(:original_price)
+    end
 
     def show
       set_item
@@ -23,10 +23,10 @@ module Administration
       end
     end
 
-# @item = Item.find(params[:id])
-#         @item.update
-#         @item.save
-#         redirect_to administration_items_path(@item.id)
+    # @item = Item.find(params[:id])
+    #         @item.update
+    #         @item.save
+    #         redirect_to administration_items_path(@item.id)
 
     private
 
@@ -37,7 +37,5 @@ module Administration
     def item_params
       params.require(:item).permit(:discount_percentage)
     end
-
   end
 end
-
