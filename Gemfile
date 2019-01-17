@@ -20,6 +20,7 @@ gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.1', '>= 5.2.1.1'
 gem 'sass-rails', '~> 5.0'
 gem 'sidekiq'
+gem 'sidekiq-failures', '~> 1.0'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 
@@ -50,3 +51,4 @@ end
 gem 'bootstrap-sass'
 gem 'simple_form'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+
